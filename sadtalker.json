@@ -1,0 +1,138 @@
+{
+    "engine": "sadtalker",
+    "name": "SAD Talker",
+    "location": "http://0.0.0.0",
+    "port": 5309,
+    "version": "1.0.9",
+    "description": "Image to Video",
+    "github": "https://github.com/OpenTalker/SadTalker/",
+    "requiresGPU": true,
+    "isFree": false,
+    "default_cost": 30000,
+    "params": [{
+        "in": "url_upload",
+        "out": "-filename",
+        "isMandatory": true,
+        "type": "string",
+        "default": null,
+        "ui": {
+            "title": "Image input",
+            "widget": "uiSelectPicture",
+            "column": 1
+        }
+    }, {
+        "in": "url_audio",
+        "out": "-audio",
+        "isMandatory": true,
+        "type": "string",
+        "default": null,
+        "ui": {
+            "title": "Audio file input",
+            "widget": "uiSelectFile",
+            "column": 1
+        }
+    }, {
+        "in": "still_image",
+        "out": "--still_mode",
+        "isMandatory": false,
+        "type": "boolean",
+        "default": false,
+        "ui": {
+            "title": "Still image mode",
+            "widget": "uiSwitch",
+            "column": 1
+        }
+    }, {
+        "in": "blink",
+        "out": "--use_blink",
+        "isMandatory": false,
+        "type": "boolean",
+        "default": true,
+        "ui": {
+            "title": "Eye blink effect",
+            "widget": "uiSwitch",
+            "column": 1
+        }
+    }, {
+        "in": "scale_image",
+        "out": "--use_enhancer",
+        "isMandatory": false,
+        "type": "boolean",
+        "default": false,
+        "ui": {
+            "title": "Scale image",
+            "widget": "uiSwitch",
+            "column": 1
+        }
+    }, {
+        "in": "preprocess",
+        "out": "--preprocess_type",
+        "isMandatory": true,
+        "type": "string",
+        "accept": {
+            "$in":["crop", "resize", "full", "extcrop", "extfull"],
+            "display":["crop", "resize", "full", "extcrop", "extfull"]
+        },
+        "default": "crop",
+        "ui": {
+            "title": "Input image pre-processing",
+            "widget": "uiMultiToggle",
+            "column": 2
+        }
+    }, {
+        "in": "res",
+        "out": "--res",
+        "isMandatory": false,
+        "type": "int",
+        "default": 256,
+        "accept": {
+            "$in":[256, 512],
+            "display":["256x256", "512x512"]
+        },
+        "freeAccess": {"$max": 512},
+        "ui": {
+            "title": "padding in px to the eye center",
+            "unit": "px",
+            "widget": "uiMultiToggle",
+            "column": 2
+        }
+    }, {
+        "in": "pose",
+        "out": "--pose_style",
+        "isMandatory": true,
+        "type": "int",
+        "default": 0,
+        "ui": {
+            "title": "Pose style",
+            "tooltip": "",
+            "displayAsPercent": false,
+            "unit": "",            
+            "min": 0,            
+            "max": 46,
+            "widget": "uiRangeSlider",
+            "column": 2
+        }
+    }, {
+        "in": "cimg",
+        "out": "--batch_size",
+        "isMandatory": true,
+        "type": "int",
+        "default": 1,
+        "accept": {
+            "$in":[1, 2, 3, 4],
+            "display":["1", "2", "3", "4"]
+        },
+        "ui": {
+            "display": false,
+            "title": "Number of videos to produce",
+            "widget": "uiMultiToggle",
+            "column": 2
+        }
+    }, {
+        "in": "output",
+        "out": "--output",
+        "isMandatory": true,
+        "type": "function",
+        "default": "$output_uid.mp4"
+    }]
+}

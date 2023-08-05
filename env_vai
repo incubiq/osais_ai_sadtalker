@@ -1,0 +1,6 @@
+ENGINE=sadtalker
+IS_DEBUG=True
+IS_LOCAL=False
+IS_VIRTUALAI=True
+VAI_ID=xxx
+VAI_SECRET=yyyy
