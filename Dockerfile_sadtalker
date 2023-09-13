@@ -17,11 +17,13 @@ COPY ./ai/src ./ai/src
 COPY ./ai/runai.py ./ai/runai.py
 
 # push again the base files
+COPY ./_temp/static/* ./static
+COPY ./_temp/templates/* ./templates
+COPY ./_temp/osais.json .
 COPY ./_temp/main_fastapi.py .
 COPY ./_temp/main_flask.py .
 COPY ./_temp/main_common.py .
 COPY ./_temp/osais_debug.py .
-COPY ./_temp/osais.json .
 
 # copy OSAIS mapping into AI
 COPY ./sadtalker.json .

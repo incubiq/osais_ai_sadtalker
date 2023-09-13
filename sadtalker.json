@@ -3,21 +3,29 @@
     "name": "SAD Talker",
     "location": "http://0.0.0.0",
     "port": 5309,
-    "version": "1.0.9",
+    "version": "1.1.3",
     "description": "Image to Video",
     "github": "https://github.com/OpenTalker/SadTalker/",
     "requiresGPU": true,
     "isFree": false,
-    "default_cost": 30000,
+    "default_cost": 45000,
     "params": [{
         "in": "url_upload",
         "out": "-filename",
         "isMandatory": true,
         "type": "string",
-        "default": null,
+        "value": {
+            "default": null
+        },
         "ui": {
             "title": "Image input",
             "widget": "uiSelectPicture",
+            "filterExt": [".png", ".jpg", ".jpeg"],
+            "maxWidth": 1024,
+            "maxHeight": 1024,
+            "minWidth": 256,
+            "minHeight": 256,
+            "maxKb": 1024,
             "column": 1
         }
     }, {
@@ -25,10 +33,14 @@
         "out": "-audio",
         "isMandatory": true,
         "type": "string",
-        "default": null,
+        "value": {
+            "default": null
+        },
         "ui": {
             "title": "Audio file input",
             "widget": "uiSelectFile",
+            "filterExt": [".wav"],
+            "maxKb": 1024,
             "column": 1
         }
     }, {
@@ -36,7 +48,9 @@
         "out": "--still_mode",
         "isMandatory": false,
         "type": "boolean",
-        "default": false,
+        "value": {
+            "default": false
+        },
         "ui": {
             "title": "Still image mode",
             "widget": "uiSwitch",
@@ -47,7 +61,9 @@
         "out": "--use_blink",
         "isMandatory": false,
         "type": "boolean",
-        "default": true,
+        "value": {
+            "default": true
+        },
         "ui": {
             "title": "Eye blink effect",
             "widget": "uiSwitch",
@@ -58,7 +74,9 @@
         "out": "--use_enhancer",
         "isMandatory": false,
         "type": "boolean",
-        "default": false,
+        "value": {
+            "default": false
+        },
         "ui": {
             "title": "Scale image",
             "widget": "uiSwitch",
@@ -69,11 +87,16 @@
         "out": "--preprocess_type",
         "isMandatory": true,
         "type": "string",
-        "accept": {
-            "$in":["crop", "resize", "full", "extcrop", "extfull"],
+        "value": {
+            "default": "crop",
+            "set":["crop", "resize", "full", "extcrop", "extfull"],
             "display":["crop", "resize", "full", "extcrop", "extfull"]
         },
-        "default": "crop",
+        "freeAccess": {
+            "default": "crop",
+            "set":["crop", "resize", "full"],
+            "display":["crop", "resize", "full"]
+        },
         "ui": {
             "title": "Input image pre-processing",
             "widget": "uiMultiToggle",
@@ -84,12 +107,16 @@
         "out": "--res",
         "isMandatory": false,
         "type": "int",
-        "default": 256,
-        "accept": {
-            "$in":[256, 512],
+        "value": {
+            "default": 256,
+            "set":[256, 512],
             "display":["256x256", "512x512"]
         },
-        "freeAccess": {"$max": 512},
+        "freeAccess": {
+            "default": 256,
+            "set":[256],
+            "display":["256x256"]
+        },
         "ui": {
             "title": "padding in px to the eye center",
             "unit": "px",
@@ -101,14 +128,16 @@
         "out": "--pose_style",
         "isMandatory": true,
         "type": "int",
-        "default": 0,
+        "value": {
+            "default": 0,
+            "min": 0,            
+            "max": 46
+        },
         "ui": {
             "title": "Pose style",
             "tooltip": "",
             "displayAsPercent": false,
             "unit": "",            
-            "min": 0,            
-            "max": 46,
             "widget": "uiRangeSlider",
             "column": 2
         }
@@ -117,10 +146,15 @@
         "out": "--batch_size",
         "isMandatory": true,
         "type": "int",
-        "default": 1,
-        "accept": {
-            "$in":[1, 2, 3, 4],
+        "value": {
+            "default": 1,
+            "set":[1, 2, 3, 4],
             "display":["1", "2", "3", "4"]
+        },
+        "freeAccess": {
+            "default": 1,
+            "set":[1],
+            "display":["1"]
         },
         "ui": {
             "display": false,
@@ -133,6 +167,8 @@
         "out": "--output",
         "isMandatory": true,
         "type": "function",
-        "default": "$output_uid.mp4"
+        "value": {
+            "default": "$output_uid.mp4"
+        }
     }]
 }

@@ -171,7 +171,16 @@ class SadTalker():
         #    cmd = r"ffmpeg -i %s -vcodec h264 %s"%(return_path, _fileRet)
         #    os.system(cmd)        
         #except:
-        shutil.copy2(return_path, _fileRet)
+
+        try: 
+            cmd = r"ffmpeg -y -i %s -ar 22050 -ab 512k -b 800k -f mp4 -s %i*%i -strict -2 -c:a aac %s"%(return_path, size, size, _fileRet)
+            os.system(cmd)
+
+            # as we convert format... we wait a bit (1sec) to ensure file is properly saved (or it risks sending a partial video)
+            import time
+            time.sleep(1)
+        except:
+            shutil.copy2(return_path, _fileRet)
 
         print(f'The generated video is: {_fileRet}')
         os.remove(return_path)
