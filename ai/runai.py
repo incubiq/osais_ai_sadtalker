@@ -191,6 +191,17 @@ class SadTalker():
 # init the global session
 sad_talker = SadTalker('ai/checkpoints', 'ai/src/config', True)
 
+## where to save the user profile?
+def fnGetUserdataPath(_username):
+    _path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    DEFAULT_PROFILE_DIR = os.path.join(_path, '_profile')
+    USER_PROFILE_DIR = os.path.join(DEFAULT_PROFILE_DIR, _username)
+    return {
+        "location": USER_PROFILE_DIR,
+        "voice": False,
+        "picture": True
+    }
+
 ## WARMUP Data
 def getWarmupData(_id):
     try:
